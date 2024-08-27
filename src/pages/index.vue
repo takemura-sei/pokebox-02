@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div v-if="pokemon">
     <h1>Pokémon: {{ pokemon.name }}</h1>
     <p>ID: {{ pokemon.id }}</p>
     <img :src="pokemon.sprites.front_default" alt="pokemon" />
+  </div>
+  <div v-else>
+    <p>Loading...</p>
   </div>
 </template>
 
