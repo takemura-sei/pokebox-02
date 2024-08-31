@@ -1,10 +1,14 @@
 // /services/pokemonService.js
+
+// ポケモンのデータを取得するサービスを定義する関数
 export const usePokemonService = () => {
+  // Nuxt アプリケーションのインスタンスから $api を取得
   const { $api } = useNuxtApp()
 
   // 特定のポケモンを名前またはIDで取得するメソッド
   const getPokemon = async (identifier) => {
     try {
+      // PokéAPI の /pokemon/{identifier} エンドポイントにリクエストを送信
       const response = await $api.get(`/pokemon/${identifier}`)
       return response.data
     } catch (error) {
@@ -16,6 +20,7 @@ export const usePokemonService = () => {
   // 全ポケモンを取得するメソッド
   const getAllPokemon = async (limit = 151, offset = 0) => {
     try {
+      // PokéAPI の /pokemon エンドポイントにリクエストを送信し、クエリパラメータとして limit と offset を設定
       const response = await $api.get(`/pokemon`, {
         params: { limit, offset }
       })
@@ -26,8 +31,10 @@ export const usePokemonService = () => {
     }
   }
 
+  // サービスが提供するメソッドをオブジェクトとして返す
   return {
-    getPokemon,
-    getAllPokemon,
+    getPokemon,      // 特定のポケモンを取得するメソッド
+    getAllPokemon,   // 全ポケモンを取得するメソッド
   }
 }
+
