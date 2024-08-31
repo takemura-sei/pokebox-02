@@ -1,6 +1,6 @@
 <script setup>
 import { usePokemonService } from '~/services/pokemonService'
-import { ref, onMounted } from 'vue'
+// import { ref, onMounted } from 'vue' 　自動インポートが可能になったため削除
 
 const { getPokemon } = usePokemonService()
 const pokemon = ref(null)
