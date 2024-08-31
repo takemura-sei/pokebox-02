@@ -6,8 +6,13 @@ const { getPokemon } = usePokemonService()
 const pokemon = ref(null)
 
 onMounted(async () => {
-  pokemon.value = await getPokemon('pikachu') // ピカチュウのデータを取得
+  pokemon.value = await getPokemon('pikachu')
 })
+
+useHead ({
+  title: 'ポケモン図鑑',
+})
+
 </script>
 
 <template>
