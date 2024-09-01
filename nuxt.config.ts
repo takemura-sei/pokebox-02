@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   srcDir: 'src/', // ソースコードが `src` フォルダにあることを指定
+  imports: {
+    autoImport: true, // 自動インポートを有効にする
+  },
   // 実行時の設定を定義
   runtimeConfig: {
     // 公開（クライアントサイドでも使用可能）設定
