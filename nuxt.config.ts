@@ -15,4 +15,9 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL || 'https://pokeapi.co/api/v2/',
     },
   },
+  modules: [
+    // ...
+    '@pinia/nuxt',
+  ],
+
 })
