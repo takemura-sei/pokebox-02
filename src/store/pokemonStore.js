@@ -26,5 +26,14 @@ export const usePokemonStore = defineStore('pokemon', { // 'pokemon' はこのst
         console.error('Failed to fetch Pokémon data:', error);
       }
     },
+    async fetchPokemonDetails(url) {
+      try {
+        const { $api } = useNuxtApp();
+        const response = await $api.get(url);
+        this.selectedPokemon = response.data;
+      } catch (error) {
+        console.error('Failed to fetch Pokémon details:', error);
+      }
+    },
   },
 });

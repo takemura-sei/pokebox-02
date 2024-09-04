@@ -15,7 +15,6 @@ onMounted(async () => {
     <ul v-if="pokemonStore.pokemonList.length">
       <li v-for="pokemon in pokemonStore.pokemonList" :key="pokemon.name">
         <PokemonCard :pokemon="pokemon" />
-        <pre>{{ pokemon }}</pre> <!-- JSON形式で確認 -->
       </li>
     </ul>
   </div>
