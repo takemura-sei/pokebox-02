@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
+// /store/pokemonStore.js
 
-export const usePokemonStore = defineStore('pokemon', {
+export const usePokemonStore = defineStore('pokemon', { // 'pokemon' はこのstoreの名前
   state: () => ({
     pokemonList: [],
     selectedPokemon: null,
@@ -8,6 +8,8 @@ export const usePokemonStore = defineStore('pokemon', {
   actions: {
     async fetchPokemonList() {
       try {
+        // useNuxtApp: Nuxt 3 のコンポーネントや composable からアプリケーションインスタンスにアクセスするための関数です。
+        // Nuxtアプリケーションのインスタンスにアクセスし、$apiを取得
         const { $api } = useNuxtApp();
         const response = await $api.get('pokemon?limit=151');
         this.pokemonList = response.data.results;

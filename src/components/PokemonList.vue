@@ -1,33 +1,22 @@
-<script>
+<script setup>
 import PokemonCard from '@/components/PokemonCard.vue';
+import { usePokemonStore } from '~/store/pokemonStore';
 
-export default {
-  components: {
-    PokemonCard,
-  },
-  props: {
-    // 親コンポーネントから渡されるポケモンのリスト
-    pokemons: {
-      type: Array,
-      required: true,
-    },
-  },
-};
+const pokemonStore = usePokemonStore()
+console.log(pokemonStore.pokemonList.length)
+
+onMounted(async () => {
+  await pokemonStore.fetchPokemonList()
+})
 </script>
 
 <template>
-  <div class="pokemon-list">
-    <!-- 'pokemons' は親コンポーネント（例えば index.vue）から渡される配列 -->
-    <PokemonCard
-      v-for="pokemon in pokemons"
-      :key="pokemon.name"
-      :pokemon="pokemon"
-    />
+  <div>
+    <ul v-if="pokemonStore.pokemonList.length">
+      <li v-for="pokemon in pokemonStore.pokemonList" :key="pokemon.name">
+        <PokemonCard :pokemon="pokemon" />
+        <pre>{{ pokemon }}</pre> <!-- JSON形式で確認 -->
+      </li>
+    </ul>
   </div>
 </template>
-
-<style scoped>
-.pokemon-list {
-  /* リスト全体のスタイルをここに追加します */
-}
-</style>
