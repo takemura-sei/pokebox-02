@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   srcDir: 'src/', // ソースコードが `src` フォルダにあることを指定
   imports: {
     autoImport: true, // 自動インポートを有効にする
+    dirs: [
+      'stores', // `stores`ディレクトリ内のストアファイルを自動的にインポート
+    ],
   },
   // 実行時の設定を定義
   runtimeConfig: {
@@ -15,4 +18,7 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL || 'https://pokeapi.co/api/v2/',
     },
   },
+  modules: [
+    '@pinia/nuxt',
+  ],
 })

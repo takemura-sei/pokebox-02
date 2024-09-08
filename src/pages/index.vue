@@ -1,14 +1,10 @@
 <script setup>
-import index from '@/components/index.vue'
-
-useHead ({
-  title: 'ポケモン図鑑',
-})
+import PokemonList from '@/components/PokemonList.vue';
 
 </script>
 
 <template>
   <div>
-    <index />
+    <PokemonList />
   </div>
 </template>
