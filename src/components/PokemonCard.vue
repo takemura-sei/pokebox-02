@@ -4,7 +4,7 @@ import { usePokemonStore } from '@/store/pokemonStore'
 
 const pokemonStore = usePokemonStore()
 
-defineProps({
+const props = defineProps({
   pokemon: {
     type: Object,
     required: true
@@ -17,15 +17,17 @@ const pokemonDetails = ref(null);
 
 // コンポーネントがマウントされたときにポケモン詳細データを取得
 onMounted(async () => {
-  await pokemonStore.fetchPokemonDetails(pokemon.url);
+  await pokemonStore.fetchPokemonDetails(props.pokemon.url);
   pokemonDetails.value = pokemonStore.selectedPokemon;
 });
 
 </script>
 
 <template>
-  <div>
-    <h3>{{ pokemon.name }}</h3>
-    <p>{{ pokemon.url }}</p>
+  <div v-if="pokemonDetails">
+    <h3>{{ pokemonDetails.name }}</h3>
+    <!-- ポケモンの画像を表示 -->
+    <img :src="pokemonDetails.sprites.front_default" :alt="pokemonDetails.name" />
   </div>
+  <p v-else>Loading...</p>
 </template>
