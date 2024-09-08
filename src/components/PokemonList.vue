@@ -1,35 +1,35 @@
 <script setup>
+import { usePokemonStore } from '@/store/pokemonStore';
 import PokemonCard from '@/components/PokemonCard.vue';
-import { usePokemonStore } from '~/store/pokemonStore';
 
-const pokemonStore = usePokemonStore()
+const pokemonStore = usePokemonStore();
 
 onMounted(async () => {
-  await pokemonStore.fetchPokemonList()
-})
+  await pokemonStore.fetchAllPokemonDetails();  // 全ポケモンの詳細を最初に取得
+});
 </script>
 
 <template>
-  <div>
-    <ul class="pokemonList">
-      <li v-for="pokemon in pokemonStore.pokemonList" :key="pokemon.name" class="pokemonItem">
+  <div v-if="pokemonStore.pokemonList.length">
+    <ul class="pokemon-list">
+      <li v-for="pokemon in pokemonStore.pokemonList" :key="pokemon.id">
         <PokemonCard :pokemon="pokemon" />
       </li>
     </ul>
   </div>
+  <p v-else>Loading...</p>
 </template>
 
 <style scoped>
-.pokemonList {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 5列のグリッド */
-  gap: 10px;
-  justify-items: center;
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
 }
-
-.pokemonItem {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
+.pokemon-list li {
+  width: 150px;
 }
 </style>
