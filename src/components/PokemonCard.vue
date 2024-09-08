@@ -19,6 +19,7 @@ const pokemonDetails = ref(null);
 onMounted(async () => {
   await pokemonStore.fetchPokemonDetails(props.pokemon.url);
   pokemonDetails.value = pokemonStore.selectedPokemon;
+  console.log(pokemonDetails.value)
 });
 
 </script>
