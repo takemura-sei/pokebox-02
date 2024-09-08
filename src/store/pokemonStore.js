@@ -1,36 +1,31 @@
-// /store/pokemonStore.js
+import { fetchData } from '@/services/pokemonApi';
 
-export const usePokemonStore = defineStore('pokemon', { // 'pokemon' はこのstoreの名前
+export const usePokemonStore = defineStore('pokemon', { 
   state: () => ({
     pokemonList: [],
     selectedPokemon: null,
   }),
   actions: {
-    async fetchPokemonList() {
+    async fetchPokemonList(limit = 151) {
       try {
-        // useNuxtApp: Nuxt 3 のコンポーネントや composable からアプリケーションインスタンスにアクセスするための関数です。
-        // Nuxtアプリケーションのインスタンスにアクセスし、$apiを取得
-        const { $api } = useNuxtApp();
-        const response = await $api.get('pokemon?limit=151');
-        this.pokemonList = response.data.results;
+        const data = await fetchData(`pokemon?limit=${limit}`);
+        this.pokemonList = data.results;
       } catch (error) {
         console.error('Failed to fetch Pokémon list:', error);
       }
     },
+    
     async fetchPokemonById(id) {
       try {
-        const { $api } = useNuxtApp();
-        const response = await $api.get(`pokemon/${id}`);
-        this.selectedPokemon = response.data;
+        this.selectedPokemon = await fetchData(`pokemon/${id}`);
       } catch (error) {
-        console.error('Failed to fetch Pokémon data:', error);
+        console.error('Failed to fetch Pokémon by ID:', error);
       }
     },
+
     async fetchPokemonDetails(url) {
       try {
-        const { $api } = useNuxtApp();
-        const response = await $api.get(url);
-        this.selectedPokemon = response.data;
+        this.selectedPokemon = await fetchData(url);
       } catch (error) {
         console.error('Failed to fetch Pokémon details:', error);
       }
