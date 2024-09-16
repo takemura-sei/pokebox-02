@@ -15,7 +15,6 @@ onMounted(async () => {
     <ul class="pokemon_list">
       <!-- pokemonListをループして各ポケモンの情報を表示 -->
       <li v-for="pokemon in pokemonStore.pokemonList" :key="pokemon.name" class="pokemon_item">
-        <h3>{{ pokemon.name }}</h3> <!-- ポケモンの名前を表示 -->
         <PokemonCard :url="pokemon.url" :name="pokemon.name"/>
       </li>
     </ul>

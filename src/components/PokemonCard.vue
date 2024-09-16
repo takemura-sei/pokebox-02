@@ -1,4 +1,5 @@
 <script setup>
+import PokemonName from '@/components/cards/PokemonName.vue';
 import PokemonImage from '@/components/cards/PokemonImage.vue'
 
 const props = defineProps({
@@ -16,6 +17,7 @@ const props = defineProps({
 
 <template>
   <div>
+    <PokemonName :name="props.name" :url="props.url" />
     <PokemonImage :name="props.name" :url="props.url"/>
   </div>
 </template>
