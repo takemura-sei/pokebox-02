@@ -24,7 +24,14 @@ onMounted(async () => {
 
 <template>
   <div>
-    <img :src="pokemonImageUrl" alt="Pokemon Image" />
+    <img :src="pokemonImageUrl" class="pokemon_img" alt="Pokemon Image" />
   </div>
 </template>
+
+<style scoped>
+.pokemon_img {
+  width: 150px;
+  height: 150px;
+}
+</style>
 
