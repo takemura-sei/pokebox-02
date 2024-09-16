@@ -1,6 +1,6 @@
 <script setup>
+import PokemonCard from '@/components/PokemonCard.vue';
 import { usePokemonStore } from '@/store/pokemonStore';
-import PokemonCard from './PokemonCard.vue';
 
 const pokemonStore = usePokemonStore();
 
