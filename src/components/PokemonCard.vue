@@ -1,28 +1,30 @@
-<!-- /components/PokemonCard.vue -->
 <script setup>
+import { usePokemonStore } from '@/store/pokemonStore';
+
+// URLをpropで受け取る
 const props = defineProps({
-  pokemon: {
-    type: Object,
+  name: {
+    type: String,
     required: true
   },
+  url: {
+    type: String,
+    required: true
+  }
 });
 
+const pokemonStore = usePokemonStore();
+const pokemonImageUrl = ref('');
+
+onMounted(async () => {
+  await pokemonStore.fetchPokemonImage(props.name, props.url);
+  pokemonImageUrl.value = pokemonStore.pokemonImage[props.name];
+});
 </script>
 
 <template>
-  <div class="pokemon-card">
-    <img :src="pokemon.sprites.front_default" :alt="pokemon.name" />
-    <h3>{{ pokemon.name }}</h3>
+  <div>
+    <img :src="pokemonImageUrl" alt="Pokemon Image" />
   </div>
 </template>
 
-<style scoped>
-.pokemon-card {
-  text-align: center;
-  padding: 10px;
-}
-.pokemon-card img {
-  width: 100px;
-  height: 100px;
-}
-</style>

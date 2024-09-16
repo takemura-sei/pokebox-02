@@ -2,24 +2,28 @@ import { fetchData } from '@/services/pokemonApi';
 
 export const usePokemonStore = defineStore('pokemon', { 
   state: () => ({
-    pokemonList: [],  // すべてのポケモンの詳細情報を保持
+    pokemonList: [], 
+    pokemonImage: {},
   }),
   actions: {
-    async fetchAllPokemonDetails() {
+    async fetchPokemonAddress() {
       try {
-        const listData = await fetchData('pokemon?limit=151');
-        
-        // 各ポケモンの詳細情報を並行して取得
-        const pokemonDetailsPromises = listData.results.map(async (pokemon) => {
-          const details = await fetchData(pokemon.url);
-          return details;
-        });
-
-        // 全てのポケモンの詳細情報を取得し、状態に保存
-        this.pokemonList = await Promise.all(pokemonDetailsPromises);
+        const listData = await fetchData();
+        console.log(listData.results);
+        this.pokemonList = listData.results;
+        return listData.results;
       } catch (error) {
         console.error('Failed to fetch Pokémon details:', error);
       }
     },
+    async fetchPokemonImage(name, url) {
+      try {
+        const pokemonDetails = await fetchData(url);
+        const imageUrl = pokemonDetails.sprites.front_default;
+        this.pokemonImage[name] = imageUrl;
+      } catch (error) {
+        console.error('Failed to fetch Pokémon details:', error);
+      }
+    }
   },
 });
