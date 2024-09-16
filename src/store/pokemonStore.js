@@ -2,33 +2,47 @@ import { fetchData } from '@/services/pokemonApi';
 
 export const usePokemonStore = defineStore('pokemon', { 
   state: () => ({
-    pokemonList: [],
-    selectedPokemon: null,
+    pokemonList: [], 
+    pokemonName: {},
+    pokemonImage: {},
   }),
   actions: {
-    async fetchPokemonList(limit = 151) {
+    async fetchPokemonAddress() {
       try {
-        const data = await fetchData(`pokemon?limit=${limit}`);
-        this.pokemonList = data.results;
-      } catch (error) {
-        console.error('Failed to fetch Pokémon list:', error);
-      }
-    },
-    
-    async fetchPokemonById(id) {
-      try {
-        this.selectedPokemon = await fetchData(`pokemon/${id}`);
-      } catch (error) {
-        console.error('Failed to fetch Pokémon by ID:', error);
-      }
-    },
-
-    async fetchPokemonDetails(url) {
-      try {
-        this.selectedPokemon = await fetchData(url);
+        const listData = await fetchData();
+        console.log(listData.results);
+        this.pokemonList = listData.results;
+        return listData.results;
       } catch (error) {
         console.error('Failed to fetch Pokémon details:', error);
       }
     },
+    async fetchPokemonJpName(name, url) {
+      try {
+        const pokemonDetails = await fetchData(url);
+        const pokemonSpecies = await fetchData(pokemonDetails.species.url);
+        // names配列から日本語名を探す
+        const jpNameEntry = pokemonSpecies.names.find(
+          entry => entry.language.name === 'ja'
+        );
+        if (jpNameEntry) {
+          this.pokemonName[name] = jpNameEntry.name;
+        } else {
+          console.error('Japanese name not found for:', name);
+        }
+      } catch (error) {
+        console.error('Failed to fetch Pokémon details:', error);
+      }
+    },
+    async fetchPokemonImage(name, url) {
+      try {
+        const pokemonDetails = await fetchData(url);
+        console.log(pokemonDetails.species.url);
+        const imageUrl = pokemonDetails.sprites.front_default;
+        this.pokemonImage[name] = imageUrl;
+      } catch (error) {
+        console.error('Failed to fetch Pokémon details:', error);
+      }
+    }
   },
 });
