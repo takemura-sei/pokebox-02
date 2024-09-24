@@ -1,3 +1,4 @@
+// /services/pokemonApi.js
 export async function fetchData(endpoint) {
   try {
     const { $api } = useNuxtApp();
