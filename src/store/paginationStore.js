@@ -3,7 +3,7 @@ export const usePaginationStore = defineStore('pagination', {
   state: () => ({
     currentPage: 1,
     totalPages: 0,
-    itemsPerPage: 20,
+    itemsPerPage: 30,
   }),
   actions: {
     setCurrentPage(page) {

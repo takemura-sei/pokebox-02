@@ -29,17 +29,15 @@ const nextPage = () => {
   <nav aria-label="Pagination">
     <ul class="pagination">
       <li>
-        <button @click="prevPage" :disabled="isFirstPage">Prev</button>
+        <button @click="prevPage" :disabled="isFirstPage">＜</button>
       </li>
-      <li v-for="page in totalPages" :key="page">
-        <button 
-          :class="{ active: page === currentPage }" 
-          @click="setPage(page)">
-          {{ page }}
+      <li>
+        <button>
+          {{ currentPage }}
         </button>
       </li>
       <li>
-        <button @click="nextPage" :disabled="isLastPage">Next</button>
+        <button @click="nextPage" :disabled="isLastPage">＞</button>
       </li>
     </ul>
   </nav>
@@ -48,11 +46,23 @@ const nextPage = () => {
 <style scoped>
 .pagination {
   display: flex;
+  align-items: center;
+  justify-content: center;
   list-style: none;
+  margin-top: 32px;
 }
+
 .pagination li {
   margin: 0 5px;
 }
+
+.pagination li button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
 button.active {
   font-weight: bold;
   color: blue;

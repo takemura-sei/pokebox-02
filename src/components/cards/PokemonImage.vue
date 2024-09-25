@@ -31,7 +31,7 @@ onMounted(async () => {
 
 <style scoped>
 .pokemon_img {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
 }
 </style>
