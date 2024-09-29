@@ -1,3 +1,4 @@
+<!-- /src/components/PokemonList.vue -->
 <script setup>
 import PokemonCard from '@/components/PokemonCard.vue';
 import { usePokemonStore } from '@/store/pokemonStore';
@@ -13,12 +14,12 @@ onMounted(async () => {
 <template>
   <div v-if="pokemonStore.pokemonList.length > 0">
     <ul class="pokemon_list">
-      <!-- pokemonListをループして各ポケモンの情報を表示 -->
       <li v-for="pokemon in pokemonStore.pokemonList" :key="pokemon.name" class="pokemon_item">
-        <PokemonCard :url="pokemon.url" :name="pokemon.name"/>
+        <PokemonCard :url="pokemon.url" :name="pokemon.name" />
       </li>
     </ul>
   </div>
+
   <p v-else>Loading Pokémon data...</p>
 </template>
 
