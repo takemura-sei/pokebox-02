@@ -5,7 +5,7 @@ import PokemonImage from '@/components/cards/PokemonImage.vue'
 import Modal from '@/components/modal/Modal.vue';
 import { useModal } from '@/composables/useModal';
 
-const { showModal, selectedItem, openModal, closeModal } = useModal(); // モーダル関数を使用
+const { showModal, openModal, closeModal } = useModal(); // モーダル関数を使用
 
 const props = defineProps({
   name: {
@@ -26,7 +26,7 @@ const props = defineProps({
     <PokemonImage :name="props.name" :url="props.url"/>
 
     <!-- モーダルウィンドウを表示 -->
-    <Modal v-if="showModal" :name="selectedItem?.name" :url="selectedItem?.url" @close="closeModal()"/>
+    <Modal v-if="showModal" :name="props.name" :url="props.url" @close="closeModal()"/>
   </div>
 </template>
 

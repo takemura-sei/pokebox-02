@@ -1,6 +1,8 @@
 <!-- /src/components/modal/Modal.vue -->
 <script setup>
 import { usePokemonStore } from '@/store/pokemonStore';
+import PokemonName from '@/components/cards/PokemonName.vue';
+import PokemonImage from '@/components/cards/PokemonImage.vue';
 
 const pokemonStore = usePokemonStore();
 const pokemonImageUrl = ref('');
@@ -26,7 +28,8 @@ onMounted(async () => {
 <template>
   <div class="modal_backdrop" @click.stop="$emit('close')">
     <div class="modal_content">
-      <img :src="pokemonImageUrl" alt="">
+      <PokemonName :name="props.name" :url="props.url" />
+      <PokemonImage :name="props.name" :url="props.url"/>
       <button @click.stop="$emit('close')">Close</button>
     </div>
   </div>
