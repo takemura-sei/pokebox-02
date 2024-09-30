@@ -1,13 +1,33 @@
 <!-- /src/components/modal/Modal.vue -->
 <script setup>
-const emit = defineEmits(['close']);
+import { usePokemonStore } from '@/store/pokemonStore';
+
+const pokemonStore = usePokemonStore();
+const pokemonImageUrl = ref('');
+
+const props = defineProps({
+  name: {
+    type: String,
+    required: true
+  },
+  url: {
+    type: String,
+    required: true
+  }
+})
+
+onMounted(async () => {
+  await pokemonStore.fetchPokemonImage(props.name, props.url);
+  pokemonImageUrl.value = pokemonStore.pokemonImage[props.name];
+});
+
 </script>
 
 <template>
-  <div class="modal_backdrop" @click="emit('close')">
-    <div class="modal_content" @click.stop>
-      <slot></slot>
-      <button @click="emit('close')">Close</button>
+  <div class="modal_backdrop" @click.stop="$emit('close')">
+    <div class="modal_content">
+      <img :src="pokemonImageUrl" alt="">
+      <button @click.stop="$emit('close')">Close</button>
     </div>
   </div>
 </template>

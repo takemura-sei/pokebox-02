@@ -14,7 +14,6 @@ export const usePokemonStore = defineStore('pokemon', {
       const limit = paginationStore.itemsPerPage;
 
       try {
-        // オフセットが151匹を超えないようにする
         const remainingPokemons = 151 - offset;
         const finalLimit = remainingPokemons < limit ? remainingPokemons : limit;
 
@@ -32,7 +31,6 @@ export const usePokemonStore = defineStore('pokemon', {
       try {
         const pokemonDetails = await fetchData(url);
         const pokemonSpecies = await fetchData(pokemonDetails.species.url);
-        // names配列から日本語名を探す
         const jpNameEntry = pokemonSpecies.names.find(
           entry => entry.language.name === 'ja'
         );

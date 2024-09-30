@@ -1,3 +1,4 @@
+<!-- /src/components/PokemonCard.vue -->
 <script setup>
 import PokemonName from '@/components/cards/PokemonName.vue';
 import PokemonImage from '@/components/cards/PokemonImage.vue'
@@ -25,7 +26,7 @@ const props = defineProps({
     <PokemonImage :name="props.name" :url="props.url"/>
 
     <!-- モーダルウィンドウを表示 -->
-    <Modal v-if="showModal" @close="closeModal" />
+    <Modal v-if="showModal" :name="selectedItem?.name" :url="selectedItem?.url" @close="closeModal()"/>
   </div>
 </template>
 
